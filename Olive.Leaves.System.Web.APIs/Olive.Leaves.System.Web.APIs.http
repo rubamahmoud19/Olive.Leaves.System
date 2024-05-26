@@ -1,0 +1,6 @@
+@Olive.Leaves.System.Web.APIs_HostAddress = http://localhost:5223
+
+GET {{Olive.Leaves.System.Web.APIs_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
