@@ -3,6 +3,13 @@ using Olive.Leaves.System.Data;
 using Olive.Leaves.System.Services.Interfaces;
 using Olive.Leaves.System.Services;
 using Olive.Leaves.System.Web.APIs.Middleware;
+using Olive.Leaves.System.Entities.Entitites;
+using Olive.Leaves.System.Entities.DTOs.Leaves;
+//using Olive.Leaves.System.Services.Mappers;
+using Olive.Leaves.System.Services.Interfaces.IMapper;
+using Olive.Leaves.System.Services.Interfaces.IRepositories;
+using Olive.Leaves.System.Services.Repositories;
+
 
 
 namespace Olive.Leaves.System.Web.APIs.Extensions
@@ -13,7 +20,12 @@ namespace Olive.Leaves.System.Web.APIs.Extensions
         {
             services.AddDbContext<AppDbContext>(options => options.UseNpgsql(config.GetConnectionString("DefaultConnection")));
             services.AddScoped<ICompanySettingsService, CompanySettingsService>();
-            services.AddScoped<ILeaveService, LeaveService>();
+            //  services.AddScoped<ILeaveService, LeaveService>();
+            //  services.AddScoped<IFilterService<LeaveDTO>, FilterService<Leave, LeaveDTO>>();
+            // services.AddScoped<IBaseMapper<Leave,LeaveDTO>, BaseMapper<Leave, LeaveDTO>>();
+            //services.AddScoped<IBaseRepository<Leave>, BaseRepository<Leave>>();
+            //services.AddScoped<IMapper, Mapper>();
+            
             services.Configure<RouteOptions>(options => options.LowercaseUrls = true);
             services.AddHttpContextAccessor();
             services.AddControllers();

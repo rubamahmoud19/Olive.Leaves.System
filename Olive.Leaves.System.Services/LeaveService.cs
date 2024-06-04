@@ -1,21 +1,29 @@
 ﻿using Mapster;
-using Microsoft.EntityFrameworkCore;
 using Olive.Leaves.System.Data;
-using Olive.Leaves.System.Entities.DTOs.Branch;
+using Olive.Leaves.System.Entities.DTOs;
 using Olive.Leaves.System.Entities.DTOs.Leaves;
-using Olive.Leaves.System.Entities.DTOs.LeaveTypes;
 using Olive.Leaves.System.Entities.Entitites;
 using Olive.Leaves.System.Entities.Enums;
 using Olive.Leaves.System.Services.Interfaces;
+using Olive.Leaves.System.Services.Interfaces.IRepositories;
 
 namespace Olive.Leaves.System.Services
 {
-    public class LeaveService : ILeaveService
+    public class LeaveService :  ILeaveService
     {
         private readonly AppDbContext _context;
-        public LeaveService(AppDbContext context)
+
+        private readonly IBaseRepository<Leave> _repository;
+        public LeaveService(
+    
+            AppDbContext context
+
+           , IBaseRepository<Leave> repository
+            )
         {
             _context = context;
+
+            _repository = repository;
         }
         public async Task<LeaveDTO> Create(LeaveRequestDTO leaveRequestDTO)
         {
@@ -47,6 +55,19 @@ namespace Olive.Leaves.System.Services
             {
                 return leave;
             }
+        }
+
+        private Boolean IsValid(LeaveRequestDTO leaveRequest)
+        {   if (leaveRequest.From >= leaveRequest.To) throw new ExceptionService(ErrorCodesEnum.BadRequest, "Invalid Date Range");
+
+            return true;
+        }
+
+        public async Task<PaginatedDataViewModel<Leave>> GetList(List<ExpressionFilter> expressionFilters)
+        {
+            var res = await _repository.GetPaginatedData(1, 1, expressionFilters);
+            return res;
+
         }
     }
 }

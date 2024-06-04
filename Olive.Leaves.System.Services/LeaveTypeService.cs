@@ -4,7 +4,6 @@ using Olive.Leaves.System.Services.Interfaces;
 using Olive.Leaves.System.Entities.Entitites;
 using Mapster;
 using Olive.Leaves.System.Entities.Enums;
-using Microsoft.EntityFrameworkCore.Infrastructure.Internal;
 
 namespace Olive.Leaves.System.Services
 {

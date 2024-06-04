@@ -9,7 +9,6 @@ namespace Olive.Leaves.System.Entities.Entitites
         public int BranchId { get; set; }
         public int Days { get; set; }
         public int PerDays {  get; set; } 
-
         public ICollection<Leave>Leaves { get; set; }
     }
 }
